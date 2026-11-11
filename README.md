@@ -1,5 +1,5 @@
 # PolyGlot Guide
-<img width="2247" height="1100" alt="demo" src="https://github.com/user-attachments/assets/6a9bedfd-d924-4607-aeec-966aeb2196b7" />
+<img width="999" height="999" alt="demo" src="https://github.com/user-attachments/assets/6a9bedfd-d924-4607-aeec-966aeb2196b7" />
 
 
 A free, no-install guide that shows how to set up and use popular programming languages.
