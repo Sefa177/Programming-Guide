@@ -4,6 +4,7 @@
   var LANGS = (window.LANGS || []).slice().sort(function (a, b) { return a.order - b.order; });
 
   var TOPIC_ORDER = [
+    ["cheat", "Cheat sheet"],
     ["setup", "Setup & run"],
     ["hello", "Hello, World"],
     ["variables", "Variables & types"],
@@ -61,7 +62,8 @@
   var COMMENTS = {
     "//": /\/\/.*|\/\*[\s\S]*?\*\//,
     "#": /#.*/,
-    ";": /;.*/
+    ";": /;.*/,
+    "--": /--.*/
   };
   var STRING_RE = /"(?:\\.|[^"\\\n])*"|'(?:\\.|[^'\\\n])*'/;
   var NUMBER_RE = /\b0x[0-9a-fA-F]+\b|\b\d+(?:\.\d+)?\b/;
@@ -153,24 +155,86 @@
 
   menuBtn.addEventListener("click", function () { sidebar.classList.toggle("open"); });
 
+  /* ---------- language filter ---------- */
+
+  var langFilterRaw = "";
+
+  function matchesLang(lang, q) {
+    if (!q) return true;
+    var hay = (lang.name + " " + lang.id + " " + lang.ext).toLowerCase();
+    if (q.length >= 3) hay += " " + (lang.usedFor || "").toLowerCase();
+    return hay.indexOf(q) !== -1;
+  }
+
+  function applyLangFilter() {
+    var q = langFilterRaw.trim().toLowerCase();
+    var shown = 0;
+    LANGS.forEach(function (lang) {
+      var ok = matchesLang(lang, q);
+      if (ok) shown++;
+      Array.prototype.forEach.call(document.querySelectorAll('[data-lang="' + lang.id + '"]'), function (el) {
+        el.hidden = !ok;
+      });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll(".lang-empty"), function (el) {
+      el.hidden = shown !== 0;
+    });
+  }
+
+  function makeFilterBox(extraClass) {
+    var box = h("input", {
+      class: "filter-box lang-filter-input " + extraClass,
+      type: "search",
+      placeholder: "Filter languages...",
+      "aria-label": "Filter languages",
+      autocomplete: "off"
+    });
+    box.value = langFilterRaw;
+    box.addEventListener("input", function () {
+      langFilterRaw = box.value;
+      Array.prototype.forEach.call(document.querySelectorAll(".lang-filter-input"), function (other) {
+        if (other !== box) other.value = langFilterRaw;
+      });
+      applyLangFilter();
+    });
+    box.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        box.value = "";
+        box.dispatchEvent(new Event("input"));
+      } else if (e.key === "Enter") {
+        var q = langFilterRaw.trim().toLowerCase();
+        var first = LANGS.filter(function (l) { return matchesLang(l, q); })[0];
+        if (first) {
+          langFilterRaw = "";
+          location.hash = "#/" + first.id;
+        }
+      }
+    });
+    return box;
+  }
+
   /* ---------- sidebar ---------- */
 
   function renderSidebar(activeId, compareActive) {
     sidebar.innerHTML = "";
+    sidebar.append(makeFilterBox("side-filter"));
     sidebar.append(h("h3", null, "Languages"));
     LANGS.forEach(function (lang) {
       var link = h("a", {
         class: "side-link" + (lang.id === activeId ? " active" : ""),
         href: "#/" + lang.id,
+        "data-lang": lang.id,
         style: "--lang:" + lang.color
       }, h("span", { class: "dot" }), lang.name);
       sidebar.append(link);
     });
+    sidebar.append(h("p", { class: "side-empty lang-empty", hidden: "" }, "No language matches."));
     sidebar.append(h("h3", null, "Tools"));
     sidebar.append(h("a", {
       class: "side-link" + (compareActive ? " active" : ""),
       href: "#/compare/hello"
     }, h("span", { class: "dot" }), "Compare languages"));
+    applyLangFilter();
   }
 
   /* ---------- views ---------- */
@@ -181,16 +245,19 @@
     main.append(
       h("section", { class: "hero" },
         h("h1", null, "Learn how to use any programming language"),
-        h("p", null, "Pick a language and get the same eight short lessons: how to install and run it, then variables, control flow, functions, collections and error handling. Every example can be copied and run as it is.")
+        h("p", null, "Pick a language and get a one-screen cheat sheet plus the same eight short lessons: how to install and run it, then variables, control flow, functions, collections and error handling. Every example can be copied and run as it is.")
       ),
+      makeFilterBox("home-filter"),
       h("div", { class: "cards" }, LANGS.map(function (lang) {
-        return h("a", { class: "card", href: "#/" + lang.id, style: "--lang:" + lang.color },
+        return h("a", { class: "card", href: "#/" + lang.id, "data-lang": lang.id, style: "--lang:" + lang.color },
           h("h3", null, lang.name),
           h("p", null, lang.tagline),
           h("span", { class: "badge" }, lang.level)
         );
-      }))
+      })),
+      h("p", { class: "empty lang-empty", hidden: "" }, "No language matches. Try another name, like py or web.")
     );
+    applyLangFilter();
   }
 
   function renderLang(lang, topicId) {
@@ -235,7 +302,8 @@
   function renderCompare(topicId) {
     renderSidebar(null, true);
     main.innerHTML = "";
-    var current = TOPIC_ORDER.filter(function (t) { return t[0] === topicId; })[0] || TOPIC_ORDER[1];
+    var current = TOPIC_ORDER.filter(function (t) { return t[0] === topicId; })[0] ||
+      TOPIC_ORDER.filter(function (t) { return t[0] === "hello"; })[0];
 
     main.append(
       h("h1", { class: "section-title" }, "Compare languages"),

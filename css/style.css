@@ -305,6 +305,23 @@ a { color: var(--accent); }
 
 .empty { color: var(--muted); padding: 24px 0; }
 
+/* Language filter */
+[hidden] { display: none !important; }
+
+.filter-box {
+  width: 100%;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.92rem;
+}
+.filter-box:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.side-filter { margin: 0 0 6px; }
+.home-filter { max-width: 360px; margin: 0 0 18px; }
+.side-empty { margin: 4px 12px; color: var(--muted); font-size: 0.88rem; }
+
 .footer {
   padding: 22px 16px;
   text-align: center;
