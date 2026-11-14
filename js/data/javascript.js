@@ -13,6 +13,12 @@ window.LANGS.push({
   types: ["console", "Error", "JSON", "Object", "Math", "Array", "fetch", "setTimeout"],
   topics: [
     {
+      id: "cheat",
+      title: "Cheat sheet",
+      text: "Hello, World, variables and loops on one screen. A quick reminder once you know the basics.",
+      code: "// Hello, World\nconsole.log(\"Hello, World!\");\n\n// Variables\nconst name = \"Ada\";         // cannot be reassigned\nlet age = 36;               // can be reassigned\nlet ready = true;\n\n// Loops\nfor (let i = 0; i < 3; i++) {\n  console.log(i);\n}\n\nlet n = 3;\nwhile (n > 0) {\n  n--;\n}\n\nfor (const item of [\"a\", \"b\"]) {   // over an array\n  console.log(item);\n}"
+    },
+    {
       id: "setup",
       title: "Setup & run",
       text: "In a browser, press F12 and open the Console to try code right away. To run files on your computer, install Node.js and use the node command.",

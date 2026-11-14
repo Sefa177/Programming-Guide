@@ -1,7 +1,7 @@
 window.LANGS = window.LANGS || [];
 window.LANGS.push({
   id: "assembly",
-  order: 8,
+  order: 9,
   name: "Assembly",
   color: "#6e7681",
   tagline: "Talk to the processor almost directly. These examples are x86-64 for Linux (NASM syntax).",
@@ -13,6 +13,12 @@ window.LANGS.push({
   kw: ["mov", "add", "sub", "mul", "div", "inc", "dec", "cmp", "jmp", "je", "jne", "jz", "jnz", "jl", "jg", "jge", "jle", "call", "ret", "push", "pop", "syscall", "xor", "lea", "loop", "global", "section", "db", "equ", "resb", "dq", "dd"],
   types: ["rax", "rbx", "rcx", "rdx", "rsi", "rdi", "rsp", "rbp", "eax", "ebx", "ecx", "edx", "al", "r8", "r9", "r10", "_start", "len", "msg", "byte", "qword"],
   topics: [
+    {
+      id: "cheat",
+      title: "Cheat sheet",
+      text: "Hello, World, variables and loops on one screen. A quick reminder once you know the basics.",
+      code: "section .data\n    msg db \"Hello, World!\", 10      ; the text + newline\n    len equ $ - msg\n    age dd 36                       ; a variable: 4-byte number in memory\n\nsection .text\n    global _start\n\n_start:\n    ; Hello, World: write(1, msg, len)\n    mov rax, 1\n    mov rdi, 1\n    mov rsi, msg\n    mov rdx, len\n    syscall\n\n    ; Variables: registers hold values, memory holds named data\n    mov rax, 5\n    mov ebx, [age]          ; read the variable from memory\n    add rax, rbx\n\n    ; Loop: run 3 times\n    mov rcx, 3\nagain:\n    dec rcx\n    jnz again\n\n    mov rax, 60             ; exit(0)\n    xor rdi, rdi\n    syscall"
+    },
     {
       id: "setup",
       title: "Setup & run",

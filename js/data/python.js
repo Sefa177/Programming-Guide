@@ -13,6 +13,12 @@ window.LANGS.push({
   types: ["print", "range", "int", "str", "float", "list", "dict", "set", "tuple", "len", "type", "ValueError", "RuntimeError"],
   topics: [
     {
+      id: "cheat",
+      title: "Cheat sheet",
+      text: "Hello, World, variables and loops on one screen. A quick reminder once you know the basics.",
+      code: "# Hello, World\nprint(\"Hello, World!\")\n\n# Variables\nname = \"Ada\"\nage = 36\npi = 3.14159\nready = True\n\n# Loops\nfor i in range(3):          # 0, 1, 2\n    print(i)\n\nn = 3\nwhile n > 0:\n    n -= 1\n\nfor item in [\"a\", \"b\"]:     # over a list\n    print(item)"
+    },
+    {
       id: "setup",
       title: "Setup & run",
       text: "Install Python from python.org, then save code in a .py file and run it with the python command. Typing python alone opens an interactive prompt where you can test single lines.",

@@ -13,6 +13,12 @@ window.LANGS.push({
   types: ["String", "System", "List", "ArrayList", "Map", "HashMap", "Exception", "IllegalArgumentException", "NumberFormatException", "Integer", "main"],
   topics: [
     {
+      id: "cheat",
+      title: "Cheat sheet",
+      text: "Hello, World, variables and loops on one screen. A quick reminder once you know the basics.",
+      code: "public class Main {\n    public static void main(String[] args) {\n        // Hello, World\n        System.out.println(\"Hello, World!\");\n\n        // Variables\n        String name = \"Ada\";\n        int age = 36;\n        double pi = 3.14159;\n        boolean ready = true;\n        var count = 5;               // type worked out for you\n\n        // Loops\n        for (int i = 0; i < 3; i++) {\n            System.out.println(i);\n        }\n\n        int n = 3;\n        while (n > 0) {\n            n--;\n        }\n\n        for (String item : new String[] {\"a\", \"b\"}) {   // over an array\n            System.out.println(item);\n        }\n    }\n}"
+    },
+    {
       id: "setup",
       title: "Setup & run",
       text: "Install a JDK (for example Temurin or OpenJDK). The file name must match the public class name. Since Java 11 you can run a single file directly, or compile first with javac.",

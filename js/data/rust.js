@@ -13,6 +13,12 @@ window.LANGS.push({
   types: ["i32", "u32", "f64", "bool", "str", "usize", "String", "Vec", "HashMap", "Result", "Option", "Ok", "Err", "Some", "None", "main"],
   topics: [
     {
+      id: "cheat",
+      title: "Cheat sheet",
+      text: "Hello, World, variables and loops on one screen. A quick reminder once you know the basics.",
+      code: "fn main() {\n    // Hello, World\n    println!(\"Hello, World!\");\n\n    // Variables\n    let name = \"Ada\";          // immutable by default\n    let mut age = 36;          // mut allows changes\n    age += 1;\n    let pi: f64 = 3.14159;\n    let ready = true;\n\n    // Loops\n    for i in 0..3 {            // 0, 1, 2\n        println!(\"{}\", i);\n    }\n\n    let mut n = 3;\n    while n > 0 {\n        n -= 1;\n    }\n\n    for item in [\"a\", \"b\"] {   // over an array\n        println!(\"{}\", item);\n    }\n}"
+    },
+    {
       id: "setup",
       title: "Setup & run",
       text: "Install Rust with rustup from rust-lang.org. It includes cargo, the tool that creates projects, builds them and runs them.",

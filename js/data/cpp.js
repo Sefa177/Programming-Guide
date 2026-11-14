@@ -13,6 +13,12 @@ window.LANGS.push({
   types: ["std", "string", "vector", "map", "cout", "cin", "endl", "runtime_error", "exception", "unique_ptr", "make_unique", "main"],
   topics: [
     {
+      id: "cheat",
+      title: "Cheat sheet",
+      text: "Hello, World, variables and loops on one screen. A quick reminder once you know the basics.",
+      code: "#include <iostream>\n#include <string>\n#include <vector>\n\nint main() {\n    // Hello, World\n    std::cout << \"Hello, World!\\n\";\n\n    // Variables\n    std::string name = \"Ada\";\n    int age = 36;\n    double pi = 3.14159;\n    auto ready = true;               // type worked out for you\n\n    // Loops\n    for (int i = 0; i < 3; i++) {\n        std::cout << i << \"\\n\";\n    }\n\n    int n = 3;\n    while (n > 0) {\n        n--;\n    }\n\n    std::vector<std::string> items = {\"a\", \"b\"};\n    for (const auto& item : items) {   // over a vector\n        std::cout << item << \"\\n\";\n    }\n}"
+    },
+    {
       id: "setup",
       title: "Setup & run",
       text: "Like C, C++ is compiled. Install g++ (part of GCC), compile with a modern standard, then run the result.",

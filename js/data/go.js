@@ -13,6 +13,12 @@ window.LANGS.push({
   types: ["int", "float64", "string", "bool", "error", "fmt", "errors", "strconv", "main", "Println", "Printf"],
   topics: [
     {
+      id: "cheat",
+      title: "Cheat sheet",
+      text: "Hello, World, variables and loops on one screen. A quick reminder once you know the basics.",
+      code: "package main\n\nimport \"fmt\"\n\nfunc main() {\n    // Hello, World\n    fmt.Println(\"Hello, World!\")\n\n    // Variables\n    var age int = 36\n    name := \"Ada\"           // short form, type inferred\n    pi := 3.14159\n    ready := true\n    fmt.Println(name, age, pi, ready)\n\n    // Loops (for is the only loop keyword)\n    for i := 0; i < 3; i++ {\n        fmt.Println(i)\n    }\n\n    n := 3\n    for n > 0 {             // acts like while\n        n--\n    }\n\n    for _, item := range []string{\"a\", \"b\"} {   // over a slice\n        fmt.Println(item)\n    }\n}"
+    },
+    {
       id: "setup",
       title: "Setup & run",
       text: "Install Go from go.dev. go run compiles and runs in one step, and go build produces a single executable file.",

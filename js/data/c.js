@@ -13,6 +13,12 @@ window.LANGS.push({
   types: ["FILE", "size_t", "printf", "malloc", "free", "fopen", "fclose", "perror", "strcpy", "main"],
   topics: [
     {
+      id: "cheat",
+      title: "Cheat sheet",
+      text: "Hello, World, variables and loops on one screen. A quick reminder once you know the basics.",
+      code: "#include <stdio.h>\n\nint main(void) {\n    // Hello, World\n    printf(\"Hello, World!\\n\");\n\n    // Variables\n    int age = 36;\n    double pi = 3.14159;\n    char grade = 'A';\n    const char *name = \"Ada\";\n\n    // Loops\n    for (int i = 0; i < 3; i++) {\n        printf(\"%d\\n\", i);\n    }\n\n    int n = 3;\n    while (n > 0) {\n        n--;\n    }\n\n    int nums[] = {1, 2, 3};        // over an array\n    for (int i = 0; i < 3; i++) {\n        printf(\"%d\\n\", nums[i]);\n    }\n    return 0;\n}"
+    },
+    {
       id: "setup",
       title: "Setup & run",
       text: "C code must be compiled first. Install gcc (Linux: your package manager, macOS: Xcode tools, Windows: MinGW or WSL), compile, then run the result.",
