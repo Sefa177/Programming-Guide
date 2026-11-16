@@ -2,6 +2,8 @@
 
 A free, no-install guide that shows how to set up and use popular programming languages.
 
+![PolyGlot Guide demo](demo.gif)
+
 **Languages:** Python, JavaScript, Rust, C, C++, Java, Go, Lua, Assembly (x86-64, NASM) and Arduino.
 
 Every language has a one-screen cheat sheet (Hello, World + variables + loops) and the same eight short lessons, so you can learn one language or compare them side by side:
