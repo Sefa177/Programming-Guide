@@ -15,7 +15,7 @@
     ["tips", "Key idea"]
   ];
 
-  var GROUPS = ["Languages", "Data & Analysis", "Tools & DevOps"];
+  var GROUPS = ["Languages", "Frameworks & Engines", "Data & Analysis", "Tools & DevOps"];
 
   function groupOf(lang) { return lang.group || "Languages"; }
 

@@ -4,7 +4,9 @@ A free, no-install guide that shows how to set up and use popular programming la
 
 ![PolyGlot Guide demo](demo.gif)
 
-**Languages:** Python, JavaScript, Rust, C, C++, Java, Go, Lua, Assembly (x86-64, NASM) and Arduino.
+**Languages:** Python, JavaScript, Rust, C, C++, Java, Go, Lua, Assembly (x86-64, NASM), Arduino, TypeScript and PHP.
+
+**Frameworks & Engines:** React, Django, Express and Unity.
 
 **Data & Analysis:** SQL, PostgreSQL, R and Excel.
 
