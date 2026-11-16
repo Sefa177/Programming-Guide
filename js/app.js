@@ -256,7 +256,7 @@
         h("p", null, "Pick a language and get a one-screen cheat sheet plus the same eight short lessons: how to install and run it, then variables, control flow, functions, collections and error handling. Every example can be copied and run as it is.")
       ),
       makeFilterBox("home-filter"),
-      GROUPS.map(function (group) {
+      h("div", { class: "groups" }, GROUPS.map(function (group) {
         var items = LANGS.filter(function (lang) { return groupOf(lang) === group; });
         if (!items.length) return null;
         return h("div", { class: "card-group", "data-group": group },
@@ -269,7 +269,7 @@
             );
           }))
         );
-      }),
+      })),
       h("p", { class: "empty lang-empty", hidden: "" }, "No match. Try another name, like py or sql.")
     );
     applyLangFilter();
