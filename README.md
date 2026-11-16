@@ -6,6 +6,10 @@ A free, no-install guide that shows how to set up and use popular programming la
 
 **Languages:** Python, JavaScript, Rust, C, C++, Java, Go, Lua, Assembly (x86-64, NASM) and Arduino.
 
+**Data & Analysis:** SQL, PostgreSQL, R and Excel.
+
+**Tools & DevOps:** Terminal and Git.
+
 Every language has a one-screen cheat sheet (Hello, World + variables + loops) and the same eight short lessons, so you can learn one language or compare them side by side:
 
 - Cheat sheet
@@ -40,7 +44,7 @@ To host it for free, enable **GitHub Pages** in the repository settings (Setting
 index.html          page shell
 css/style.css       all styling
 js/app.js           routing, search, compare view, theme
-js/data/*.js        one file per language (the lessons live here)
+js/data/*.js        one file per language or tool (the lessons live here)
 ```
 
 ## Add a language

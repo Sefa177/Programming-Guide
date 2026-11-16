@@ -15,6 +15,10 @@
     ["tips", "Key idea"]
   ];
 
+  var GROUPS = ["Languages", "Data & Analysis", "Tools & DevOps"];
+
+  function groupOf(lang) { return lang.group || "Languages"; }
+
   var main = document.getElementById("main");
   var sidebar = document.getElementById("sidebar");
   var search = document.getElementById("search");
@@ -161,7 +165,7 @@
 
   function matchesLang(lang, q) {
     if (!q) return true;
-    var hay = (lang.name + " " + lang.id + " " + lang.ext).toLowerCase();
+    var hay = (lang.name + " " + lang.id + " " + (lang.ext || "")).toLowerCase();
     if (q.length >= 3) hay += " " + (lang.usedFor || "").toLowerCase();
     return hay.indexOf(q) !== -1;
   }
@@ -218,18 +222,22 @@
   function renderSidebar(activeId, compareActive) {
     sidebar.innerHTML = "";
     sidebar.append(makeFilterBox("side-filter"));
-    sidebar.append(h("h3", null, "Languages"));
-    LANGS.forEach(function (lang) {
-      var link = h("a", {
-        class: "side-link" + (lang.id === activeId ? " active" : ""),
-        href: "#/" + lang.id,
-        "data-lang": lang.id,
-        style: "--lang:" + lang.color
-      }, h("span", { class: "dot" }), lang.name);
-      sidebar.append(link);
+    GROUPS.forEach(function (group) {
+      var items = LANGS.filter(function (lang) { return groupOf(lang) === group; });
+      if (!items.length) return;
+      sidebar.append(h("h3", { "data-group": group }, group));
+      items.forEach(function (lang) {
+        var link = h("a", {
+          class: "side-link" + (lang.id === activeId ? " active" : ""),
+          href: "#/" + lang.id,
+          "data-lang": lang.id,
+          style: "--lang:" + lang.color
+        }, h("span", { class: "dot" }), lang.name);
+        sidebar.append(link);
+      });
     });
-    sidebar.append(h("p", { class: "side-empty lang-empty", hidden: "" }, "No language matches."));
-    sidebar.append(h("h3", null, "Tools"));
+    sidebar.append(h("p", { class: "side-empty lang-empty", hidden: "" }, "No match."));
+    sidebar.append(h("h3", null, "Compare"));
     sidebar.append(h("a", {
       class: "side-link" + (compareActive ? " active" : ""),
       href: "#/compare/hello"
@@ -248,14 +256,21 @@
         h("p", null, "Pick a language and get a one-screen cheat sheet plus the same eight short lessons: how to install and run it, then variables, control flow, functions, collections and error handling. Every example can be copied and run as it is.")
       ),
       makeFilterBox("home-filter"),
-      h("div", { class: "cards" }, LANGS.map(function (lang) {
-        return h("a", { class: "card", href: "#/" + lang.id, "data-lang": lang.id, style: "--lang:" + lang.color },
-          h("h3", null, lang.name),
-          h("p", null, lang.tagline),
-          h("span", { class: "badge" }, lang.level)
+      GROUPS.map(function (group) {
+        var items = LANGS.filter(function (lang) { return groupOf(lang) === group; });
+        if (!items.length) return null;
+        return h("div", { class: "card-group", "data-group": group },
+          h("h2", { class: "group-title" }, group),
+          h("div", { class: "cards" }, items.map(function (lang) {
+            return h("a", { class: "card", href: "#/" + lang.id, "data-lang": lang.id, style: "--lang:" + lang.color },
+              h("h3", null, lang.name),
+              h("p", null, lang.tagline),
+              h("span", { class: "badge" }, lang.level)
+            );
+          }))
         );
-      })),
-      h("p", { class: "empty lang-empty", hidden: "" }, "No language matches. Try another name, like py or web.")
+      }),
+      h("p", { class: "empty lang-empty", hidden: "" }, "No match. Try another name, like py or sql.")
     );
     applyLangFilter();
   }
@@ -275,7 +290,7 @@
         h("div", { class: "meta" },
           h("span", { class: "badge" }, lang.level),
           h("span", { class: "badge" }, "Used for: " + lang.usedFor),
-          h("span", { class: "badge" }, "Files end in " + lang.ext)
+          lang.ext ? h("span", { class: "badge" }, "Files end in " + lang.ext) : null
         )
       ),
       chips

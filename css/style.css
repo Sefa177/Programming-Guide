@@ -349,3 +349,6 @@ a { color: var(--accent); }
   .pill-link { display: none; }
   .brand span { display: none; }
 }
+
+.group-title { font-size: 1.1rem; margin: 28px 0 12px; color: var(--muted, inherit); }
+.card-group:first-of-type .group-title { margin-top: 12px; }
